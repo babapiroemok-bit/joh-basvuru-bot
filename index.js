@@ -26,6 +26,8 @@ const client = new Client({
   partials: [Partials.Channel, Partials.Message],
 });
 
+const { setupWatchdog } = require('./watchdog');
+
 const TOKEN     = process.env.BASVURU_TOKEN;
 const GUILD_ID  = process.env.GUILD_ID;
 const CLIENT_ID = '1505286602505719848';
@@ -93,6 +95,7 @@ client.once('ready', async () => {
   console.log(`✅ Başvuru Bot aktif: ${client.user.tag}`);
   await registerCommands();
   await setupRoles();
+  setupWatchdog(client, TOKEN, GUILD_ID);
 });
 
 async function setupRoles() {
